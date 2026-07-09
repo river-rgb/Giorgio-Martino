@@ -89,13 +89,13 @@ function buildApp(shadow){
   const form=app.querySelector('form');
   form.addEventListener('submit',e=>{e.preventDefault();const data=Object.fromEntries(new FormData(form));const leads=JSON.parse(localStorage.getItem('newsletter_leads')||'[]');leads.push({...data,createdAt:new Date().toISOString(),page:location.href});localStorage.setItem('newsletter_leads',JSON.stringify(leads));form.reset();app.querySelector('.notice').style.display='block'});
   shadow.appendChild(app);
-  buildAgeGate(shadow);
+  buildAgeGate();
 }
 
 const host=document.getElementById('root');
 if(host){
   const closedShadow=host.attachShadow({mode:'closed'});
   const cssLink=document.createElement('link');cssLink.rel='stylesheet';cssLink.href='assets_vjs/theme-Km9pQ4zT.css';closedShadow.appendChild(cssLink);
-  buildAgeGate();
+  buildApp(closedShadow);
 }
 localStorage.removeItem('entrypoint-chunk-retry-count');
